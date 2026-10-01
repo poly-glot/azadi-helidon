@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Update Bank Details</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Update Bank Details</h1>
+
+  <!-- Success message -->
+  <div th:if="${success}" class="c-alert c-alert--success" role="alert">
+    Your bank details have been updated successfully.
+  </div>
+
+  <div th:if="${error}" class="c-alert c-alert--danger" role="alert">
+    <span th:text="${error}">Please check the details entered.</span>
+  </div>
+
+  <form th:action="@{/finance/update-bank-details}" method="post"
+        class="u-margin-bottom-normal">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+
+    <!-- Confirmations -->
+    <div class="c-panel c-panel--header">
+      <div class="c-panel__inner">
+        <p><strong class="u-prominent">Before we can update your bank details, please confirm the following:</strong></p>
+
+        <div class="c-form__field">
+          <label class="c-option">
+            <input type="checkbox" class="c-option__input" name="confirmAccountHolder" value="true" required>
+            <span class="c-option__label">I confirm that I am the account holder or an authorised signatory to the account.</span>
+          </label>
+        </div>
+
+        <div class="c-form__field">
+          <label class="c-option">
+            <input type="checkbox" class="c-option__input" name="confirmSingleSignatory" value="true" required>
+            <span class="c-option__label">I confirm that the account in question requires only one signatory.</span>
+          </label>
+        </div>
+
+        <div class="c-form__field c-form__field--none">
+          <label class="c-option">
+            <input type="checkbox" class="c-option__input" name="confirmDebitAuth" value="true" required>
+            <span class="c-option__label">I confirm that I can authorise debits from the account.</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- New bank details -->
+    <div class="c-panel c-panel--content">
+      <div class="c-panel__inner">
+        <div class="c-form__field">
+          <strong class="u-prominent">Enter your new bank details below:</strong>
+        </div>
+
+        <div class="c-form__field">
+          <label for="accountHolder" class="c-form__label">Account holder(s) name:</label>
+          <input type="text" name="accountHolderName" id="accountHolder" class="c-input"
+                 th:value="${bankDetails != null ? bankDetails.accountHolderName : ''}"
+                 placeholder="Account holder(s) name" required>
+        </div>
+
+        <div class="c-form__field">
+          <label for="accountNumber" class="c-form__label">Account number:</label>
+          <input type="text" name="accountNumber" id="accountNumber"
+                 class="c-input c-input--medium"
+                 th:value="${bankDetails != null ? '****' + bankDetails.lastFourAccount : ''}"
+                 placeholder="Account number" inputmode="numeric" required
+                 maxlength="8" pattern="[0-9]{8}">
+        </div>
+
+        <div class="c-form__field">
+          <label for="sortCode" class="c-form__label">Bank sort code:</label>
+          <input type="text" name="sortCode" id="sortCode"
+                 class="c-input c-input--medium"
+                 th:value="${bankDetails != null ? '**-**-' + bankDetails.lastTwoSortCode : ''}"
+                 placeholder="XX-XX-XX" required
+                 maxlength="8" pattern="\d{2}-\d{2}-\d{2}">
+        </div>
+
+        <div class="c-form__actions">
+          <button type="submit" class="c-button c-button--cta">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Help section -->
+  <th:block th:replace="~{fragments/help-panel :: help-panel}" />
+
+</div>
+</body>
+</html>

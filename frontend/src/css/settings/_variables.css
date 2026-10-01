@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Settings: Variables
+   Global design tokens for the Azadi Financial Services portal.
+   ========================================================================== */
+
+:root {
+  /* Colour palette */
+  --color-primary: #0c121d;
+  --color-bg: #fcfbfc;
+  --color-text: #282828;
+  --color-error: #e4042b;
+  --color-success: #2e7d32;
+  --color-info: #0c121d;
+  --color-white: #ffffff;
+
+  /* Grey scale */
+  --color-gray-100: #f8f9f9;
+  --color-gray-200: #e6eff3;
+  --color-gray-300: #e2e5e5;
+  --color-gray-400: #bfc0c1;
+  --color-gray-500: #afb4b7;
+  --color-gray-600: #858789;
+  --color-gray-700: #2c3e50;
+
+  /* Typography — matches reference fixed scale (1rem = 14px at 0.875em html) */
+  --font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  --font-size-base: 1rem;
+  --line-height: 1.5;
+
+  /* Fixed type scale */
+  --font-size-xs: 0.71429rem; /* 10px */
+  --font-size-sm: 0.85714rem; /* 12px */
+  --font-size-md: 1rem; /* 14px */
+  --font-size-lg: 1.14286rem; /* 16px */
+  --font-size-xl: 1.28571rem; /* 18px */
+  --font-size-2xl: 1.71429rem; /* 24px */
+  --font-size-3xl: 2.71429rem; /* 38px */
+
+  /* Spacing — 21px base matches reference (1.5rem at 14px) */
+  --spacing-unit: 21px;
+  --spacing-tiny: calc(var(--spacing-unit) * 0.25);
+  --spacing-small: calc(var(--spacing-unit) * 0.5);
+  --spacing-medium: var(--spacing-unit);
+  --spacing-large: calc(var(--spacing-unit) * 2);
+  --spacing-xlarge: calc(var(--spacing-unit) * 4);
+
+  /* Layout */
+  --max-width: 1366px;
+  --sidebar-width: 30%;
+  --content-width: 70%;
+
+  /* Borders */
+  --radius: 0.25rem;
+  --border-color: var(--color-gray-300);
+
+  /* Transitions */
+  --transition: 200ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+  /* Breakpoints (for documentation; actual media queries below) */
+  --bp-tablet: 48rem;
+  --bp-desktop: 64rem;
+}

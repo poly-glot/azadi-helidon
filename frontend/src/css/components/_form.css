@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Components: Form
+   Form field, label, input, select, validation styling.
+   ========================================================================== */
+
+.c-form__field {
+  margin-block-end: var(--spacing-medium);
+}
+
+.c-form__field--none {
+  margin-block-end: 0;
+}
+
+.c-form__label {
+  display: block;
+  margin-block-end: var(--spacing-tiny);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.c-form__required {
+  color: var(--color-error);
+}
+
+/* Text inputs */
+.c-input {
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding-inline: var(--spacing-small);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-400);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.c-input:hover {
+  border-color: var(--color-gray-600);
+}
+
+.c-input:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(12, 18, 29, 0.15);
+}
+
+.c-input::placeholder {
+  color: var(--color-gray-500);
+}
+
+.c-input--error {
+  border-color: var(--color-error);
+}
+
+.c-input--error:focus-visible {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(228, 4, 43, 0.15);
+}
+
+.c-input--small {
+  max-width: 160px;
+}
+
+.c-input--medium {
+  max-width: 280px;
+}
+
+.c-input--tiny {
+  max-width: 80px;
+  text-align: center;
+}
+
+/* Select dropdowns */
+.c-select {
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding-inline: var(--spacing-small);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23282828' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-small) center;
+  border: 1px solid var(--color-gray-400);
+  border-radius: var(--radius);
+  appearance: none;
+  cursor: pointer;
+  padding-inline-end: 2.5rem;
+}
+
+.c-select:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(12, 18, 29, 0.15);
+}
+
+.c-select--wide {
+  width: 100%;
+}
+
+.c-select--small {
+  max-width: 160px;
+}
+
+/* Input groups (side by side inputs with separators) */
+.c-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-tiny);
+}
+
+.c-input-group__sep {
+  font-weight: 600;
+  color: var(--color-gray-600);
+  flex-shrink: 0;
+}
+
+/* Input with placeholder icon */
+.c-input-placeholder {
+  position: relative;
+}
+
+.c-input-placeholder__icon {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--spacing-small);
+  transform: translateY(-50%);
+  font-weight: 600;
+  color: var(--color-gray-600);
+}
+
+.c-input-placeholder .c-input {
+  padding-inline-start: 2rem;
+}
+
+/* Stripe Elements card mount */
+.c-stripe-card {
+  padding: var(--spacing-small);
+  border: 1px solid var(--color-gray-400);
+  border-radius: var(--radius);
+}
+
+/* Checkbox / Radio */
+.c-option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-small);
+  cursor: pointer;
+}
+
+.c-option__input {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-block-start: 0.125rem;
+  accent-color: var(--color-primary);
+}
+
+.c-option__label {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height);
+}
+
+/* Validation messages */
+.c-field-error {
+  display: block;
+  margin-block-start: var(--spacing-tiny);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.c-field-error--dark {
+  color: var(--color-white);
+  background-color: var(--color-error);
+  padding: var(--spacing-tiny) var(--spacing-small);
+  border-radius: var(--radius);
+  margin-block-start: var(--spacing-small);
+}
+
+/* Form actions */
+.c-form__actions {
+  padding-block-start: var(--spacing-small);
+}
+
+.c-form__actions--inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

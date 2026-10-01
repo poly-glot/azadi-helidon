@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Components: Toolbar
+   Greeting bar below header.
+   ========================================================================== */
+
+.c-toolbar {
+  background-color: #f3f5f729;
+  color: #000;
+  line-height: 1;
+  padding-block: 0.875rem;
+  text-transform: uppercase;
+  position: relative;
+  border-block-end: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.c-toolbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 1px 4px 0 rgba(1, 1, 1, 0.1);
+  pointer-events: none;
+}
+
+.c-toolbar__greeting {
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  margin: 0;
+  color: #000;
+}

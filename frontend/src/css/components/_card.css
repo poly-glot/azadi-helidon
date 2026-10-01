@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Components: Card / Panel
+   Content cards with border, padding. Maps from panel in static site.
+   ========================================================================== */
+
+.c-panel {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.c-panel__inner {
+  padding: var(--spacing-medium);
+}
+
+.c-panel--header {
+  background-color: var(--color-gray-100);
+  border-block-end: none;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.c-panel--content {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+
+.c-panel--hero {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  text-align: center;
+  padding: var(--spacing-large);
+}
+
+.c-panel--hero h1 {
+  color: var(--color-white);
+}
+
+.c-panel__amount {
+  font-size: var(--font-size-3xl);
+  font-weight: 400;
+  margin-block-end: var(--spacing-small);
+}
+
+/* Title divider bar (agreement number) */
+.c-panel__divider {
+  border-block-end: 2px solid var(--border-color);
+  padding-block-end: var(--spacing-small);
+  margin-block-end: var(--spacing-medium);
+}

@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Components: Dialog
+   Login dialog / modal styling.
+   ========================================================================== */
+
+.c-dialog {
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+}
+
+.c-dialog__inner {
+  padding: var(--spacing-large) var(--spacing-medium);
+}
+
+@media (min-width: 48rem) {
+  .c-dialog__inner {
+    padding: var(--spacing-large);
+  }
+}
+
+.c-dialog--shadow {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Error page centered dialog */
+.c-dialog--error {
+  max-width: 36rem;
+  text-align: center;
+}
+
+.c-dialog__heading {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-primary);
+}

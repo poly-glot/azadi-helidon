@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Objects: Band
+   Full-width section with background support.
+   ========================================================================== */
+
+.o-band {
+  padding: 63px 0;
+}
+
+.o-band--md {
+  padding: 42px 0;
+  flex: 1;
+}
+
+.o-band--fullscreen {
+  min-height: calc(100dvh - (126px + 90px)); /* removes padding and fixed header */
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.o-band--login {
+  /* Dark overlay is pre-baked into the image assets (35% brightness). */
+  background-color: #000;
+  background-image: url('../img/azadi-dashboard.jpg');
+  background-image: image-set(
+    url('../img/azadi-dashboard.avif') type('image/avif'),
+    url('../img/azadi-dashboard.webp') type('image/webp'),
+    url('../img/azadi-dashboard.jpg') type('image/jpeg')
+  );
+}
+
+.o-band--gray {
+  background-color: var(--color-gray-100);
+}

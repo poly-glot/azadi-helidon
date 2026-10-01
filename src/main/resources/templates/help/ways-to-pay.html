@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Ways to Pay</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Ways to Pay</h1>
+
+  <details class="c-accordion c-accordion--section">
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Direct Debit</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>Direct Debit is the easiest way to pay. Your payments are automatically collected
+          from your bank account on your chosen payment date each month.</p>
+        <p class="u-margin-bottom-none">If you haven't already set up a Direct Debit, please contact our
+          customer services team on <strong>0345 786 4321</strong> and we'll arrange this for you.</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="c-accordion c-accordion--section">
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Debit Card</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>You can make a one-off payment using your debit card through our
+          <a th:href="@{/finance/make-a-payment}">online payment facility</a>.</p>
+        <p class="u-margin-bottom-none">Alternatively, call our customer services team on <strong>0345 786 4321</strong>
+          to make a payment over the phone.</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="c-accordion c-accordion--section" open>
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Bank Transfer</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>You can pay us online through your own bank account. Use your agreement number
+          as the reference and the following bank details:</p>
+        <div class="c-table u-margin-bottom-small">
+          <div class="c-table__row">
+            <div class="c-table__column c-table__column--label">Sort code:</div>
+            <div class="c-table__column">20-22-33</div>
+          </div>
+          <div class="c-table__row">
+            <div class="c-table__column c-table__column--label">Account number:</div>
+            <div class="c-table__column">00123456</div>
+          </div>
+        </div>
+        <p class="u-note u-margin-bottom-none">Please allow up to three working days for the payment to
+          be reflected in your account.</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="c-accordion c-accordion--section">
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Standing Order</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>You can set up a standing order with your bank to make regular payments to us.
+          Use the bank details above and your agreement number as the reference.</p>
+        <p class="u-note u-margin-bottom-none">Please ensure the standing order is set up in time for
+          your next payment date to avoid missing a payment.</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="c-accordion c-accordion--section">
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Cheque</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>Send a cheque made payable to <strong>"Azadi Financial Services"</strong> to:</p>
+        <p>
+          <strong>Azadi Financial Services</strong><br>
+          Imaginary Road<br>
+          Birmingham<br>
+          B28 0HB
+        </p>
+        <p class="u-note u-margin-bottom-none">Please write your agreement number on the back of the cheque
+          and allow five working days for delivery and processing.</p>
+      </div>
+    </div>
+  </details>
+
+</div>
+</body>
+</html>

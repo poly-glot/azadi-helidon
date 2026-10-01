@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Make a Payment</title>
+  <script src="https://js.stripe.com/v3/" th:attr="nonce=${cspNonce}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Make a Payment</h1>
+
+  <div class="u-margin-bottom-normal">
+    <p>Please tell us how much you would like to pay and input your card details, then click 'Pay'.</p>
+  </div>
+
+  <!-- Success message -->
+  <div th:if="${param.success}" class="c-alert c-alert--success" role="alert">
+    Your payment has been processed successfully.
+  </div>
+
+  <form th:action="@{/finance/make-a-payment}" method="post" id="payment-form"
+        th:attr="data-stripe-key=${stripePublishableKey}" class="u-margin-bottom-normal">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+
+    <!-- Agreement Selection -->
+    <div th:if="${agreements != null and !agreements.empty}" class="c-panel c-panel--header">
+      <div class="c-panel__inner">
+        <div class="c-form__field c-form__field--none">
+          <label for="agreementId" class="c-form__label">Agreement</label>
+          <select name="agreementId" id="agreementId" class="c-select" required>
+            <option th:each="agr : ${agreements}" th:value="${agr.id}" th:text="${agr.agreementNumber}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Amount -->
+    <div class="c-panel c-panel--header">
+      <div class="c-panel__inner">
+        <div class="c-form__field c-form__field--none">
+          <label for="amount" class="c-form__label">Payment Amount</label>
+          <div class="c-input-placeholder">
+            <div class="c-input-placeholder__icon">£</div>
+            <input type="text" name="amount" id="amount" class="c-input"
+                   placeholder="500"
+                   th:value="${amount}"
+                   inputmode="decimal"
+                   required>
+          </div>
+          <p class="u-note u-margin-top">
+            <strong>Note:</strong> If you are making a payment over and above your normal monthly amount,
+            please contact us so that we can discuss Partial or Full Settlement options.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Input (Stripe Elements) -->
+    <div class="c-panel c-panel--content">
+      <div class="c-panel__inner">
+        <div class="c-form__field">
+          <label class="c-form__label">Card Details</label>
+          <div id="card-element" class="c-stripe-card">
+            <!-- Stripe Elements will mount here -->
+          </div>
+          <div id="card-errors" class="c-field-error" role="alert"></div>
+        </div>
+
+        <div class="c-form__actions">
+          <button type="submit" class="c-button">Pay</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Help section -->
+  <th:block th:replace="~{fragments/help-panel :: help-panel}" />
+
+</div>
+</body>
+</html>

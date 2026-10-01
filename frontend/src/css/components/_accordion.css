@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Components: Accordion
+   Native <details>/<summary> based accordion.
+   ========================================================================== */
+
+.c-accordion {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-block-end: var(--spacing-small);
+  overflow: hidden;
+}
+
+.c-accordion__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: var(--spacing-small) var(--spacing-medium);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-primary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  background-color: var(--color-gray-100);
+  transition: background-color var(--transition);
+}
+
+.c-accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.c-accordion__summary::marker {
+  content: '';
+}
+
+.c-accordion__summary:hover {
+  background-color: var(--color-gray-200);
+}
+
+.c-accordion__summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.c-accordion__summary--link {
+  background: transparent;
+  padding: 0;
+  color: var(--color-link, #1a0dab);
+  text-transform: none;
+  font-weight: 400;
+  text-decoration: underline;
+  border: none;
+}
+
+.c-accordion__summary--link:hover {
+  background: transparent;
+  color: var(--color-link-hover, #1a0dab);
+}
+
+.c-accordion__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.c-accordion__label {
+  flex: 1;
+}
+
+/* Indicator removed — reference has no visible expand/collapse icons */
+
+.c-accordion__panel {
+  border-block-start: 1px solid var(--border-color);
+}
+
+.c-accordion__panel--padded {
+  padding: var(--spacing-medium);
+}
+
+.c-accordion__panel--shadow {
+  box-shadow: var(--shadow-sm) inset;
+}
+
+.c-accordion__content {
+  padding: 42px 21px;
+}
+
+/* Navigation accordion variant */
+.c-accordion--nav {
+  border: none;
+  border-radius: 0;
+  margin-block-end: 0;
+}
+
+.c-accordion--nav .c-accordion__summary {
+  background-color: transparent;
+  text-transform: capitalize;
+  padding-inline: var(--spacing-small);
+  border-block-end: 1px solid var(--border-color);
+}
+
+.c-accordion--nav .c-accordion__panel {
+  padding: 0;
+  border: none;
+}
+
+/* Section accordion variant (my-account cards) */
+.c-accordion--section {
+  margin-block-end: 2.625rem;
+  border: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.c-accordion--section .c-accordion__summary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-size: 1.125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-block-end: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.c-accordion--section .c-accordion__summary:hover {
+  background-color: var(--color-gray-100);
+}
+
+.c-accordion--section .c-accordion__panel {
+  padding: 0;
+  border-block-start: none;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}
+
+/* FAQ variant — flat numbered list with dividers */
+.c-accordion--faq {
+  margin-block-end: 0;
+  border: none;
+  border-radius: 0;
+  border-block-end: 1px solid var(--border-color);
+  overflow: visible;
+  counter-increment: faq;
+}
+
+.c-accordion--faq:first-of-type {
+  border-block-start: 1px solid var(--border-color);
+  counter-reset: faq;
+  counter-increment: faq;
+}
+
+.c-accordion--faq .c-accordion__summary {
+  background-color: transparent;
+  text-transform: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  letter-spacing: normal;
+  padding-inline: 0;
+}
+
+.c-accordion--faq .c-accordion__summary::before {
+  content: counter(faq) '.';
+  min-width: 1.75em;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.c-accordion--faq .c-accordion__summary--link::before {
+  content: none;
+}
+
+.c-accordion--faq .c-accordion__summary:hover {
+  background-color: transparent;
+  color: var(--color-gray-600);
+}
+
+.c-accordion--faq .c-accordion__panel {
+  border-block-start: none;
+  padding: 0 0 var(--spacing-medium) 0;
+}
+
+.c-accordion--plain {
+  border: none;
+}
+
+.c-accordion--plain-no-border,
+.c-accordion--plain-no-border:first-of-type {
+  border: none;
+  border-block-start: none;
+  border-block-end: none;
+}
+
+/* Ways-to-pay spaced variant */
+.c-accordion--spaced {
+  margin-block-end: var(--spacing-medium);
+}

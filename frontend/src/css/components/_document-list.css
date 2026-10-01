@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Components: Document List
+   Document list with file icons and download links.
+   ========================================================================== */
+
+.c-documents {
+  margin-block: var(--spacing-medium);
+}
+
+.c-documents__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: 0 var(--spacing-medium);
+  min-height: 3.75rem;
+  text-decoration: none;
+  background: #e3e4e6;
+  color: var(--color-primary);
+  border-block-end: 1px solid var(--color-gray-400);
+  font-family: var(--font-family);
+  transition:
+    color 0.4s,
+    background-color 0.4s;
+  width: 100%;
+}
+
+.c-documents__item:hover {
+  background-color: #858789;
+  color: var(--color-white);
+}
+
+.c-documents__item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.c-documents__icon img {
+  width: 2rem;
+  height: auto;
+}
+
+.c-documents__label {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  display: flex;
+  flex: 1 0;
+  align-items: center;
+  gap: var(--spacing-small);
+  position: relative;
+}
+
+.c-documents__sticker {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-white);
+  background-color: var(--color-error);
+  border-radius: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.c-documents__indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-tiny);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+}
+
+.c-documents__download {
+  width: 1rem;
+  height: 1rem;
+}
+
+.c-documents__item--new {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}

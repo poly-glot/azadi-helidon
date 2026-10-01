@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Elements: Base
+   Base HTML element styling.
+   ========================================================================== */
+
+html {
+  font-size: 0.875em; /* 14px — matches reference */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 3.28571rem;
+}
+h2 {
+  font-size: 2.71429rem;
+}
+h3 {
+  font-size: 1.71429rem;
+}
+h4 {
+  font-size: 1.42857rem;
+}
+h5 {
+  font-size: 1.28571rem;
+}
+h6 {
+  font-size: 1.14286rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-block-end: var(--spacing-medium);
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+p {
+  margin-block-end: var(--spacing-medium);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-gray-700);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+ul,
+ol {
+  padding-inline-start: var(--spacing-large);
+  margin-block-end: var(--spacing-medium);
+}
+
+li + li {
+  margin-block-start: var(--spacing-tiny);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}

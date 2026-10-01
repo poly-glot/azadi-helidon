@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Request a Statement</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Request a Statement</h1>
+
+  <div class="u-margin-bottom-normal">
+    <p class="u-note">If you request a statement, a paper copy will be sent to your home address within five working days.</p>
+  </div>
+
+  <!-- Success message -->
+  <div th:if="${success}" class="c-alert c-alert--success" role="alert">
+    Your statement request has been submitted successfully.
+  </div>
+
+  <!-- Agreement selector (when multiple) -->
+  <div th:if="${agreements != null and agreements.size() > 1}" class="u-margin-bottom-normal">
+    <label for="agreementSelect" class="c-form__label">Select Agreement:</label>
+    <select id="agreementSelect" class="c-select"
+            onchange="document.querySelectorAll('.js-agreement-id').forEach(el => el.value = this.value)">
+      <option th:each="agr : ${agreements}" th:value="${agr.id}" th:text="${agr.agreementNumber}"></option>
+    </select>
+  </div>
+
+  <!-- Email Statement -->
+  <form th:action="@{/finance/request-a-statement}" method="post" class="u-margin-bottom-normal">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+    <input type="hidden" name="agreementId" class="js-agreement-id"
+           th:value="${agreements != null and !agreements.empty ? agreements[0].id : ''}">
+    <div class="c-panel c-panel--header u-padding-none">
+      <div class="c-panel__inner">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Email Address:</strong>
+              <span class="c-inline-edit__value" th:text="${email} ?: 'john.smith@internet.co.uk'">john.smith@internet.co.uk</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit Email Address</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div>
+              <strong class="c-inline-edit__label">New Email Address:</strong>
+              <input type="email" name="email" class="c-input"
+                     th:placeholder="${email} ?: 'john.smith@internet.co.uk'">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Confirm</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-panel c-panel--content">
+      <div class="c-panel__inner">
+        <button type="submit" class="c-button c-button--cta">Send Statement</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Post Statement -->
+  <form th:action="@{/finance/request-a-statement}" method="post" class="u-margin-bottom-normal">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+    <input type="hidden" name="agreementId" class="js-agreement-id"
+           th:value="${agreements != null and !agreements.empty ? agreements[0].id : ''}">
+    <div class="c-panel c-panel--header u-padding-none">
+      <div class="c-panel__inner">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Current Address:</strong>
+              <span class="c-inline-edit__value" th:text="${address} ?: '29 Street Name, Town, County A12 BCD'">29 Street Name, Town, County A12 BCD</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit Address</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div>
+              <strong class="c-inline-edit__label">New Address:</strong>
+              <input type="text" name="houseName" class="c-input c-input--medium" placeholder="House Number/Name">
+              <input type="text" name="postcode" class="c-input c-input--small u-margin-top-tiny" placeholder="Postcode">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Look Up</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-panel c-panel--content">
+      <div class="c-panel__inner">
+        <button type="submit" class="c-button c-button--cta">Request Statement</button>
+      </div>
+    </div>
+  </form>
+
+</div>
+</body>
+</html>

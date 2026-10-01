@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Agreement Details</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Agreement Details</h1>
+
+  <div class="u-title u-title--border u-margin-bottom-normal">
+    <p class="u-h5 u-margin-bottom-none">
+      <strong>Agreement number: </strong>
+      <span th:text="${agreement.agreementNumber()}">12345 58936 54894</span>
+    </p>
+  </div>
+
+  <div class="o-layout o-layout--2col">
+
+    <!-- Account Details -->
+    <div>
+      <details class="c-accordion c-accordion--section" open>
+        <summary class="c-accordion__summary">
+          <span class="c-accordion__label">Account Details</span>
+        </summary>
+
+        <div class="c-accordion__panel">
+          <div class="c-table">
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Current balance:</div>
+              <div class="c-table__column" th:text="${agreement.balance()}">&#163;64,999.60</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Original agreement term:</div>
+              <div class="c-table__column" th:text="${agreement.originalTermMonths() + ' months'}">49 months</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">APR %:</div>
+              <div class="c-table__column" th:text="${agreement.apr()}">10%</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Contract Mileage:</div>
+              <div class="c-table__column" th:text="${#numbers.formatInteger(agreement.contractMileage(), 1, 'COMMA')}">40,000</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Excess Price per Mile:</div>
+              <div class="c-table__column" th:text="${agreement.excessPricePerMile()}">&#163;0.10</div>
+            </div>
+          </div>
+
+          <div class="c-accordion__content">
+            <p><strong>Model:</strong> <span th:text="${agreement.vehicleModel()}">AZADI SUMMIT V8 TOURING</span></p>
+            <p class="u-margin-bottom-none"><strong>Registration Number:</strong> <span th:text="${agreement.registration()}">AB68 ABC</span></p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Payment Details -->
+    <div>
+      <details class="c-accordion c-accordion--section" open>
+        <summary class="c-accordion__summary">
+          <span class="c-accordion__label">Payment Details</span>
+        </summary>
+
+        <div class="c-accordion__panel">
+          <div class="c-table">
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Last payment received:</div>
+              <div class="c-table__column" th:text="${agreement.lastPayment()}">&#163;1,127.32</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Date received:</div>
+              <div class="c-table__column" th:text="${agreement.lastPaymentDate()}">27/05/2018</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Amount of next payment:</div>
+              <div class="c-table__column" th:text="${agreement.nextPayment()}">&#163;1,127.32</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Date next payment is due:</div>
+              <div class="c-table__column" th:text="${agreement.nextPaymentDate()}">28/06/2018</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Payments remaining:</div>
+              <div class="c-table__column" th:text="${agreement.paymentsRemaining()}">31</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--label">Date of final payment:</div>
+              <div class="c-table__column" th:text="${agreement.finalPaymentDate()}">28/12/2020</div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="u-margin-top-normal">
+    <a th:href="@{/my-account}" class="c-button c-button--secondary">Back to My Account</a>
+  </div>
+
+</div>
+</body>
+</html>

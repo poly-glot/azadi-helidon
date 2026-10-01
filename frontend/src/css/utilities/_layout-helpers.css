@@ -1,0 +1,26 @@
+/* ==========================================================================
+   Utilities: Layout Helpers
+   Reusable layout patterns extracted from inline styles.
+   ========================================================================== */
+
+/* Narrow centered article (legal pages) */
+.u-article-narrow {
+  max-width: 48rem !important;
+  margin-inline: auto !important;
+}
+
+/* Flex button group (cancel + confirm side by side) */
+.u-button-group {
+  display: flex !important;
+  gap: var(--spacing-small) !important;
+  flex-wrap: wrap !important;
+}
+
+.u-button-group--center {
+  justify-content: center !important;
+}
+
+/* Demo login link container */
+.u-demo-link {
+  text-align: right;
+}

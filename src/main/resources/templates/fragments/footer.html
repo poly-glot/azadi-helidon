@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="footer">
+
+  <!-- Navigation links -->
+  <div class="c-site-navigation">
+    <div class="o-wrapper">
+      <div class="c-site-navigation__links">
+        <a th:href="@{/}">Azadi UK</a>
+        <a th:href="@{/cookies}">Cookies Policy</a>
+        <a th:href="@{/privacy}">Privacy Policy</a>
+        <a th:href="@{/terms}">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal footer -->
+  <footer class="c-site-footer">
+    <div class="o-wrapper">
+      <div class="c-site-footer__legal">
+        <p>Azadi Motors Limited: Registered office: Imaginary Road, Birmingham B28 0HB.
+          Registered in England No: 1770010</p>
+        <p>These results are obtained through standardized EU manufacturer testing to ensure a fair comparison between
+          vehicles. Please note that real-world driving conditions will affect actual fuel efficiency.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

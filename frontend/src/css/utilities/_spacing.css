@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Utilities: Spacing
+   Margin/padding utilities using custom properties.
+   ========================================================================== */
+
+.u-margin-none {
+  margin: 0 !important;
+}
+.u-margin-bottom-none {
+  margin-block-end: 0 !important;
+}
+.u-margin-bottom-small {
+  margin-block-end: var(--spacing-small) !important;
+}
+.u-margin-bottom-normal {
+  margin-block-end: var(--spacing-medium) !important;
+}
+.u-margin-bottom-medium {
+  margin-block-end: var(--spacing-large) !important;
+}
+.u-margin-top {
+  margin-block-start: var(--spacing-medium) !important;
+}
+.u-margin-top-normal {
+  margin-block-start: var(--spacing-medium) !important;
+}
+.u-margin-vertical {
+  margin-block: var(--spacing-medium) !important;
+}
+
+.u-margin-top-tiny {
+  margin-block-start: var(--spacing-tiny) !important;
+}
+
+.u-padding {
+  padding: var(--spacing-medium) !important;
+}
+.u-padding-none {
+  padding: 0 !important;
+}
+.u-padding-vertical {
+  padding-block: var(--spacing-medium) !important;
+}
+.u-padding-horizontal-normal {
+  padding-inline: var(--spacing-medium) !important;
+}

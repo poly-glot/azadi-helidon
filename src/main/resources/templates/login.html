@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+    <title>Login</title>
+    <th:block layout:fragment="head-preload">
+        <link rel="preload" as="image" type="image/avif"
+              th:href="@{/assets/img/azadi-dashboard.avif}" fetchpriority="high">
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content-public">
+
+    <div class="o-band o-band--fullscreen o-band--login">
+        <div class="o-wrapper">
+            <div class="c-dialog c-dialog--shadow u-small">
+                <div class="c-dialog__inner">
+                    <h3 class="c-dialog__heading u-margin-bottom-small u-condense">
+                        Welcome to<br>Azadi Financial Services
+                    </h3>
+
+                    <p>Please enter your details in the fields below to log into your Azadi Financial
+                        Services customer account.</p>
+
+                    <!-- Error message -->
+                    <div th:if="${error}" class="c-alert c-alert--danger" role="alert">
+                        <strong>Login failed:</strong>
+                        <span>Invalid credentials. Please try again.</span>
+                    </div>
+
+                    <form th:action="@{/login}" method="post" id="login-form">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+
+                        <!-- Date of Birth -->
+                        <div class="c-form__field">
+                            <label for="dob-day" class="c-form__label">
+                                Date of birth<span class="u-color-default">*</span>
+                            </label>
+
+                            <div class="c-input-group">
+                                <select name="dobDay" id="dob-day" class="c-select" required>
+                                    <option value="" disabled selected>Day</option>
+                                    <option th:each="d : ${#numbers.sequence(1, 31)}"
+                                            th:value="${d}" th:text="${d}"></option>
+                                </select>
+
+                                <select name="dobMonth" id="dob-month" class="c-select" required>
+                                    <option value="" disabled selected>Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+
+                                <select name="dobYear" id="dob-year" class="c-select" required>
+                                    <option value="" disabled selected>Year</option>
+                                    <option th:each="y : ${#numbers.sequence(2008, 1940)}"
+                                            th:value="${y}" th:text="${y}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Postcode -->
+                        <div class="c-form__field">
+                            <label for="postcode" class="c-form__label">
+                                Postcode<span class="u-color-error">*</span>
+                            </label>
+                            <input type="text"
+                                   name="postcode"
+                                   id="postcode"
+                                   class="c-input c-input--small"
+                                   placeholder="Postcode"
+                                   required
+                                   th:classappend="${postcodeError} ? 'c-input--error' : ''">
+                            <span th:if="${postcodeError}" class="c-field-error" th:text="${postcodeError}">
+                This field is required
+              </span>
+                        </div>
+
+                        <!-- Agreement Number -->
+                        <div class="c-form__field">
+                            <label for="agreement" class="c-form__label">
+                                Agreement Number<span class="u-color-default">*</span>
+                            </label>
+                            <input type="text"
+                                   name="agreementNumber"
+                                   id="agreement"
+                                   class="c-input"
+                                   placeholder="Agreement number"
+                                   required
+                                   inputmode="numeric">
+
+                            <details class="c-accordion c-accordion--faq c-accordion--plain c-accordion--plain-no-border u-margin-top-tiny">
+                                <summary class="c-accordion__summary c-accordion__summary--link u-small">
+                                    Where can I find my agreement number?
+                                </summary>
+                                <div class="c-accordion__panel u-padding-none">
+                                    <p class="u-margin-bottom-small">Please note that your agreement number can be
+                                        found:</p>
+                                    <ul>
+                                        <li>In the finance agreement you received from the retailer, a copy of which you
+                                            should have received from us in the post.
+                                        </li>
+                                        <li>In the reference field of your Direct Debit agreement with us, this should
+                                            be accessible to you via your bank online.
+                                        </li>
+                                        <li>In the introductory SMS you received from us at the start of your
+                                            agreement.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- Remember agreement -->
+                        <div class="c-form__field">
+                            <label class="c-option">
+                                <input type="checkbox" name="rememberAgreement" class="c-option__input" value="1">
+                                <span class="c-option__label">Remember my agreement number</span>
+                            </label>
+                        </div>
+
+                        <!-- Hidden combined credential field for Spring Security -->
+                        <input type="hidden" name="username" id="username-field">
+                        <input type="hidden" name="password" id="password-field">
+
+                        <div class="c-form__actions c-form__actions--inline">
+                            <button type="submit" class="c-button">Login</button>
+
+                            <div th:if="${demoMode}" class="u-demo-link">
+                                <a href="#" id="demo-login-link" class="u-small">Login as
+                                    demo user</a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script th:attr="nonce=${cspNonce}">
+                        document.getElementById('login-form').addEventListener('submit', function (e) {
+                            var agreement = document.getElementById('agreement').value;
+                            var day = document.getElementById('dob-day').value;
+                            var month = document.getElementById('dob-month').value;
+                            var year = document.getElementById('dob-year').value;
+                            var postcode = document.getElementById('postcode').value;
+
+                            document.getElementById('username-field').value = agreement;
+                            document.getElementById('password-field').value = day + '/' + month + '/' + year + '|' + postcode;
+                        });
+
+                        var demoLink = document.getElementById('demo-login-link');
+                        if (demoLink) {
+                            demoLink.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                document.getElementById('dob-day').value = '15';
+                                document.getElementById('dob-month').value = '3';
+                                document.getElementById('dob-year').value = '1985';
+                                document.getElementById('postcode').value = 'SW1A 1AA';
+                                document.getElementById('agreement').value = 'AGR-100001';
+                                document.getElementById('login-form').requestSubmit();
+                            });
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

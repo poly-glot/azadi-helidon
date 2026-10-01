@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Contact Us</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Contact Us</h1>
+
+  <div class="u-margin-bottom-normal">
+    <p>
+      If you would like to contact Azadi Financial Services, you can get in touch via telephone or post.<br>
+      <strong>Note:</strong> Many queries related to payments, settlement figures and changes to your account are
+      answered in the <a th:href="@{/help/faqs}" class="u-prominent">FAQs</a>.
+    </p>
+  </div>
+
+  <!-- Customer Services -->
+  <details class="c-accordion c-accordion--section" open>
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Customer Services</span>
+      
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <div>
+          Call Customer Services on:<br>
+          <strong class="u-text-2xl">0345 786 4321</strong>
+        </div>
+
+        <div class="u-margin-top">
+          Lines are open:<br>
+          <div class="c-table c-table--auto c-table--normal">
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--condense"><strong>Monday to Friday</strong></div>
+              <div class="c-table__column">8:30am - 6:00pm (excluding UK Bank Holidays)</div>
+            </div>
+            <div class="c-table__row">
+              <div class="c-table__column c-table__column--condense"><strong>Saturday</strong></div>
+              <div class="c-table__column">9:00am - 1:00pm</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="u-margin-top">
+          Calls will cost no more than a UK national rate call to 01 or 02 telephone numbers and will also count
+          towards inclusive UK call minutes provided in telephone and mobile phone contracts.
+        </p>
+
+        <p>
+          For customers who are hard of hearing or have speech difficulties, you can contact us using the Text
+          Relay (NGT) Service.
+        </p>
+
+        <p>
+          You can write to Azadi Financial Services at our head office at:<br>
+          <strong>
+            Azadi Financial Services<br>
+            Imaginary Road<br>
+            Birmingham<br>
+            B28 0HB
+          </strong>
+        </p>
+
+        <p>Please include a telephone number, so that we can contact you if we need to.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- Collections Contact Centre -->
+  <details class="c-accordion c-accordion--section">
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Collections Contact Centre</span>
+      
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <div class="c-accordion__content">
+        <p>If you are experiencing financial difficulty and are struggling to make your payments, please contact our
+          Collections team as soon as possible. We are here to help and can discuss options available to you.</p>
+        <p>
+          <strong>Telephone:</strong>  0345 786 1234<br>
+          <strong>Monday to Friday:</strong> 8:30am - 6:00pm<br>
+          <strong>Saturday:</strong> 9:00am - 1:00pm
+        </p>
+      </div>
+    </div>
+  </details>
+
+</div>
+</body>
+</html>

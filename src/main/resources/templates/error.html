@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Error</title>
+</head>
+<body>
+<div layout:fragment="content-public">
+
+  <div class="o-band o-band--fullscreen o-band--gray">
+    <div class="o-wrapper">
+      <div class="c-dialog c-dialog--error">
+        <div class="c-dialog__inner">
+          <h1 class="u-text-3xl u-color-error"
+              th:text="${status}">500</h1>
+          <h2 class="c-dialog__heading u-margin-bottom-small">
+            <span th:text="${error}">Something went wrong</span>
+          </h2>
+          <p th:text="${message}">
+            An unexpected error has occurred. Please try again later.
+          </p>
+          <div class="c-form__actions">
+            <a th:href="@{/}" class="c-button">Return to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Also handle authenticated error pages -->
+<div layout:fragment="content">
+  <h1 class="u-condense u-text-2xl">Error</h1>
+  <div class="c-alert c-alert--danger">
+    <p><strong>Error <span th:text="${status}">500</span>:</strong>
+      <span th:text="${error}">Something went wrong</span></p>
+    <p th:text="${message}">
+      An unexpected error has occurred.</p>
+  </div>
+  <a th:href="@{/my-account}" class="c-button">Return to My Account</a>
+</div>
+</body>
+</html>

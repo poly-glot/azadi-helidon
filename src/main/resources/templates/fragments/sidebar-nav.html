@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="sidebar-nav" aria-label="Main navigation">
+
+  <!-- My Account -->
+  <div class="c-nav-item">
+    <a th:href="@{/my-account}"
+       th:classappend="${#strings.contains(requestURI, '/my-account')} ? 'c-nav-link--active' : ''"
+       class="c-nav-link">
+      <span class="c-nav-link__label">My Account</span>
+    </a>
+  </div>
+
+  <!-- My Documents -->
+  <div class="c-nav-item">
+    <a th:href="@{/my-documents}"
+       th:classappend="${#strings.contains(requestURI, '/my-documents')} ? 'c-nav-link--active' : ''"
+       class="c-nav-link">
+      <span class="c-nav-link__label">
+        <span th:if="${unreadDocuments != null and unreadDocuments > 0}"
+              th:text="'(' + ${unreadDocuments} + ') '"></span>My Documents
+      </span>
+    </a>
+  </div>
+
+  <!-- Manage My Finance (expandable) -->
+  <details class="c-nav-details"
+           th:open="${#strings.contains(requestURI, '/finance/')}">
+    <summary>
+      <span class="c-nav-link__label">Manage My Finance</span>
+    </summary>
+    <div class="c-nav-sub">
+      <a th:href="@{/finance/make-a-payment}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/make-a-payment')} ? 'c-nav-sub__link--active' : ''">
+        Make a Payment
+      </a>
+      <a th:href="@{/finance/change-payment-date}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/change-payment-date')} ? 'c-nav-sub__link--active' : ''">
+        Change Payment Date
+      </a>
+      <a th:href="@{/finance/settlement-figure}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/settlement-figure')} ? 'c-nav-sub__link--active' : ''">
+        Settlement Figure
+      </a>
+      <a th:href="@{/finance/request-a-statement}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/request-a-statement')} ? 'c-nav-sub__link--active' : ''">
+        Request a Statement
+      </a>
+      <a th:href="@{/finance/update-bank-details}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/update-bank-details')} ? 'c-nav-sub__link--active' : ''">
+        Update Bank Details
+      </a>
+    </div>
+  </details>
+
+  <!-- My Contact Details -->
+  <div class="c-nav-item">
+    <a th:href="@{/my-contact-details}"
+       th:classappend="${#strings.contains(requestURI, '/my-contact-details')} ? 'c-nav-link--active' : ''"
+       class="c-nav-link">
+      <span class="c-nav-link__label">My Contact Details</span>
+    </a>
+  </div>
+
+  <!-- Help (expandable) -->
+  <details class="c-nav-details"
+           th:open="${#strings.contains(requestURI, '/help/')}">
+    <summary>
+      <span class="c-nav-link__label">Help</span>
+    </summary>
+    <div class="c-nav-sub">
+      <a th:href="@{/help/faqs}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/faqs')} ? 'c-nav-sub__link--active' : ''">
+        FAQs
+      </a>
+      <a th:href="@{/help/ways-to-pay}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/ways-to-pay')} ? 'c-nav-sub__link--active' : ''">
+        Ways to Pay
+      </a>
+      <a th:href="@{/help/contact-us}" class="c-nav-sub__link"
+         th:classappend="${#strings.contains(requestURI, '/contact-us')} ? 'c-nav-sub__link--active' : ''">
+        Contact Us
+      </a>
+    </div>
+  </details>
+
+</nav>
+</body>
+</html>

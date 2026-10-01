@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 44" width="140" height="44">
+  <!-- A -->
+  <path d="M6,36 L16,8 L26,36 M10,26 L22,26" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Z: top bar, bottom bar, three horizontal cuts, NO diagonal -->
+  <g>
+    <!-- Top bar -->
+    <line x1="36" y1="8" x2="56" y2="8" stroke="#000" stroke-width="3.2" stroke-linecap="round"/>
+    <!-- Cut 1 -->
+    <line x1="50" y1="15" x2="55" y2="15" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    <!-- Cut 2 -->
+    <line x1="45" y1="22" x2="53" y2="22" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    <!-- Cut 3 -->
+    <line x1="40" y1="29" x2="51" y2="29" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    <!-- Bottom bar -->
+    <line x1="36" y1="36" x2="56" y2="36" stroke="#000" stroke-width="3.2" stroke-linecap="round"/>
+  </g>
+
+  <!-- A -->
+  <path d="M66,36 L76,8 L86,36 M70,26 L82,26" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- D -->
+  <path d="M96,8 L96,36 L106,36 Q120,36 120,22 Q120,8 106,8 Z" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- I -->
+  <line x1="132" y1="8" x2="132" y2="36" stroke="#000" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

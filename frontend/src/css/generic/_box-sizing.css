@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Generic: Box-sizing
+   Inheritable box-sizing for composability.
+   ========================================================================== */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

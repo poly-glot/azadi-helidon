@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Privacy Policy</title>
+</head>
+<body>
+<div layout:fragment="content-full">
+  <div class="o-band o-band--md">
+    <div class="o-wrapper">
+      <article class="u-article-narrow">
+
+        <h1 class="u-site-heading">Privacy Policy</h1>
+        <p class="u-note">Last updated: 1 April 2026</p>
+
+        <h2>Who we are</h2>
+        <p>Azadi Financial Services is a trading name of Azadi Motors Limited
+          (registered in England No. 1770010). We are the data controller for the
+          personal information we collect through this portal.</p>
+
+        <h2>Information we collect</h2>
+        <ul>
+          <li><strong>Identity data:</strong> name, date of birth</li>
+          <li><strong>Contact data:</strong> address, email, phone number</li>
+          <li><strong>Financial data:</strong> agreement details, payment history, bank details (encrypted at rest)</li>
+          <li><strong>Technical data:</strong> IP address, browser type, session identifiers</li>
+        </ul>
+
+        <h2>How we use your information</h2>
+        <ul>
+          <li>To manage your finance agreement and process payments</li>
+          <li>To verify your identity when you log in</li>
+          <li>To send transactional communications (payment confirmations, settlement figures)</li>
+          <li>To comply with legal and regulatory obligations</li>
+          <li>To detect and prevent fraud</li>
+        </ul>
+
+        <h2>Legal basis for processing</h2>
+        <p>We process your personal data on the basis of:</p>
+        <ul>
+          <li><strong>Contract:</strong> processing necessary to perform our agreement with you</li>
+          <li><strong>Legal obligation:</strong> processing required by financial regulations</li>
+          <li><strong>Legitimate interest:</strong> fraud prevention and security</li>
+        </ul>
+
+        <h2>Data sharing</h2>
+        <p>We share your data only with:</p>
+        <ul>
+          <li><strong>Stripe:</strong> to process card payments (subject to <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe's Privacy Policy</a>)</li>
+          <li><strong>Google Cloud Platform:</strong> to host and store data securely</li>
+          <li><strong>Regulatory bodies:</strong> where required by law</li>
+        </ul>
+        <p>We do not sell your personal data to third parties.</p>
+
+        <h2>Data retention</h2>
+        <p>We retain your data for the duration of your agreement plus six years to
+          comply with financial record-keeping requirements. Audit logs are retained
+          for three years.</p>
+
+        <h2>Your rights</h2>
+        <p>Under data protection law, you have the right to:</p>
+        <ul>
+          <li>Access your personal data</li>
+          <li>Rectify inaccurate data</li>
+          <li>Request erasure (subject to legal retention requirements)</li>
+          <li>Restrict or object to processing</li>
+          <li>Data portability</li>
+          <li>Lodge a complaint with the Information Commissioner's Office (ICO)</li>
+        </ul>
+
+        <h2>Security</h2>
+        <p>We protect your data using encryption at rest and in transit, content security
+          policies, rate limiting, session management, and audit logging. Bank details
+          are AES-256 encrypted — only the last four digits of your account number are
+          ever displayed.</p>
+
+        <h2>Contact</h2>
+        <p>For privacy enquiries, write to the Data Protection Officer at
+          <strong>Azadi Financial Services, Imaginary Road, Birmingham B28 0HB</strong>
+          or call <strong>0345 786 4321</strong>.</p>
+      </article>
+    </div>
+  </div>
+</div>
+</body>
+</html>

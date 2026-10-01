@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Utilities: Width
+   Grid column span utilities.
+   ========================================================================== */
+
+.u-width-full {
+  width: 100% !important;
+}
+
+/* These apply within CSS Grid contexts, using grid-column */
+@media (min-width: 48rem) {
+  .u-width-1\/2\@tablet {
+    grid-column: span 1;
+  }
+}

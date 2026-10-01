@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Azadi Financial Services - Main Stylesheet
+   Uses @layer for deterministic specificity ordering.
+   ========================================================================== */
+
+@layer settings, generic, elements, objects, components, utilities;
+
+/* Settings */
+@import './settings/_variables.css' layer(settings);
+
+/* Generic */
+@import './generic/_normalize.css' layer(generic);
+@import './generic/_box-sizing.css' layer(generic);
+
+/* Elements */
+@import './elements/_base.css' layer(elements);
+
+/* Objects */
+@import './objects/_wrapper.css' layer(objects);
+@import './objects/_layout.css' layer(objects);
+@import './objects/_band.css' layer(objects);
+
+/* Components */
+@import './components/_button.css' layer(components);
+@import './components/_accordion.css' layer(components);
+@import './components/_form.css' layer(components);
+@import './components/_card.css' layer(components);
+@import './components/_dialog.css' layer(components);
+@import './components/_site-header.css' layer(components);
+@import './components/_sidebar-nav.css' layer(components);
+@import './components/_toolbar.css' layer(components);
+@import './components/_footer.css' layer(components);
+@import './components/_table.css' layer(components);
+@import './components/_alert.css' layer(components);
+@import './components/_document-list.css' layer(components);
+@import './components/_inline-edit.css' layer(components);
+
+/* Utilities */
+@import './utilities/_spacing.css' layer(utilities);
+@import './utilities/_width.css' layer(utilities);
+@import './utilities/_visibility.css' layer(utilities);
+@import './utilities/_text.css' layer(utilities);
+@import './utilities/_layout-helpers.css' layer(utilities);

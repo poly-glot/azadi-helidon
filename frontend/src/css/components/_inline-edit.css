@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Components: Inline Edit
+   Toggle between display and edit views for fields.
+   ========================================================================== */
+
+.c-inline-edit {
+  border-block-end: 1px solid var(--border-color);
+  padding: var(--spacing-small) var(--spacing-medium);
+}
+
+.c-inline-edit:last-child {
+  border-block-end: none;
+}
+
+.c-inline-edit__display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+}
+
+.c-inline-edit__fields {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+
+.c-inline-edit.is-editing .c-inline-edit__display {
+  display: none;
+}
+
+.c-inline-edit.is-editing .c-inline-edit__fields {
+  display: flex;
+  background-color: #e3e4e6;
+  padding: var(--spacing-small) var(--spacing-medium);
+  margin: calc(-1 * var(--spacing-small)) calc(-1 * var(--spacing-medium));
+}
+
+.c-inline-edit__label {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  margin-inline-end: var(--spacing-tiny);
+}
+
+.c-inline-edit__value {
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-tiny);
+}
+
+.c-inline-edit__button {
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.c-inline-edit__button:hover {
+  color: var(--color-gray-700);
+}
+
+.c-inline-edit__button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.c-inline-edit__field-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.c-inline-edit__field-group .c-input {
+  width: 100%;
+}
+
+.c-inline-edit__actions {
+  display: flex;
+  gap: var(--spacing-tiny);
+  align-self: flex-end;
+}
+
+.c-inline-edit__status {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-success);
+}

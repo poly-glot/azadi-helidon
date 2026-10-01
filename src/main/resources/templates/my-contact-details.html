@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>My Contact Details</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">My Contact Details</h1>
+
+  <div class="c-alert c-alert--danger">
+    Please note that any changes you make using this facility will be automatically applied
+    to all your Azadi Financial Services accounts but may take up to 24 hours to be reflected.
+  </div>
+
+  <!-- Success message -->
+  <div th:if="${success}" class="c-alert c-alert--success" role="alert">
+    Your contact details have been updated successfully.
+  </div>
+
+  <!-- Address Section -->
+  <details class="c-accordion c-accordion--section" open>
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Address</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+      <form th:action="@{/my-contact-details}" method="post">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Current Address:</strong>
+              <span class="c-inline-edit__value"
+                    th:text="${customer.addressLine1} ?: '29 Street Name, Town, County A12 BCD'">29 Street Name, Town, County A12 BCD</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit Address</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div class="c-inline-edit__field-group">
+              <strong class="c-inline-edit__label">New Address:</strong>
+              <input type="text" name="houseName" class="c-input" placeholder="Address line 1"
+                     th:value="${customer.addressLine1}">
+              <input type="text" name="postcode" class="c-input c-input--small u-margin-top-tiny" placeholder="Postcode"
+                     th:value="${customer.postcode}">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Save</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </details>
+
+  <!-- Contact Details Section -->
+  <details class="c-accordion c-accordion--section" open>
+    <summary class="c-accordion__summary">
+      <span class="c-accordion__label">Contact Details</span>
+    </summary>
+    <div class="c-accordion__panel c-accordion__panel--shadow">
+
+      <!-- Home Phone -->
+      <form th:action="@{/my-contact-details}" method="post">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Home Phone Number:</strong>
+              <span class="c-inline-edit__value"
+                    th:text="${customer.phone} ?: '0121 552 2828'">0121 552 2828</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div class="c-inline-edit__field-group">
+              <strong class="c-inline-edit__label">New Phone Number:</strong>
+              <input type="tel" name="homePhone" class="c-input"
+                     th:placeholder="${customer.phone} ?: '0121 552 2828'">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Save</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Mobile Phone -->
+      <form th:action="@{/my-contact-details}" method="post">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Mobile Phone Number:</strong>
+              <span class="c-inline-edit__value"
+                    th:text="${customer.mobilePhone} ?: '07989 856 632'">07989 856 632</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div class="c-inline-edit__field-group">
+              <strong class="c-inline-edit__label">New Mobile Number:</strong>
+              <input type="tel" name="mobilePhone" class="c-input"
+                     th:placeholder="${customer.mobilePhone} ?: '07989 856 632'">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Save</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Email -->
+      <form th:action="@{/my-contact-details}" method="post">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+        <div class="c-inline-edit" data-inline-edit>
+          <div class="c-inline-edit__display">
+            <div>
+              <strong class="c-inline-edit__label">Email Address:</strong>
+              <span class="c-inline-edit__value"
+                    th:text="${customer.email} ?: 'john.smith@internet.co.uk'">john.smith@internet.co.uk</span>
+            </div>
+            <button type="button" class="c-inline-edit__button" data-inline-edit-trigger>Edit</button>
+          </div>
+          <div class="c-inline-edit__fields">
+            <div class="c-inline-edit__field-group">
+              <strong class="c-inline-edit__label">New Email Address:</strong>
+              <input type="email" name="email" class="c-input"
+                     th:placeholder="${customer.email} ?: 'john.smith@internet.co.uk'">
+            </div>
+            <div class="c-inline-edit__actions">
+              <button type="submit" class="c-button c-button--small">Save</button>
+              <button type="button" class="c-button c-button--secondary c-button--small" data-inline-edit-cancel>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </details>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Utilities: Text
+   Text alignment, sizing, and decoration utilities.
+   ========================================================================== */
+
+.u-text-center {
+  text-align: center !important;
+}
+.u-text-end {
+  text-align: end !important;
+}
+.u-text-start {
+  text-align: start !important;
+}
+
+.u-small {
+  font-size: var(--font-size-sm) !important;
+}
+.u-note {
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-gray-600) !important;
+}
+.u-prominent {
+  font-weight: 600 !important;
+}
+.u-normal {
+  font-weight: 400 !important;
+}
+.u-condense {
+  line-height: 1.2 !important;
+}
+.u-large {
+  font-size: var(--font-size-3xl) !important;
+}
+
+.u-text-2xl {
+  font-size: var(--font-size-2xl) !important;
+}
+.u-text-3xl {
+  font-size: var(--font-size-3xl) !important;
+}
+
+.u-color-error {
+  color: var(--color-error) !important;
+}
+.u-color-default {
+  color: var(--color-primary) !important;
+}
+
+.u-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.u-h5 {
+  font-size: var(--font-size-md) !important;
+}
+
+/* Site heading (page title) matching reference brand */
+.u-site-heading {
+  font-weight: 400 !important;
+  line-height: 1.1 !important;
+}
+
+/* Agreement title bar */
+.u-title {
+  display: inline-block !important;
+  padding: 0.6875rem 1.3125rem 0.6875rem 0 !important;
+  text-transform: uppercase !important;
+}
+
+.u-title--border {
+  border-block-start: 1px solid var(--color-gray-500) !important;
+  border-block-end: 1px solid var(--color-gray-500) !important;
+}

@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Objects: Layout
+   CSS Grid based layout system.
+   ========================================================================== */
+
+.o-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 21px;
+}
+
+.o-layout--medium {
+  gap: 42px;
+}
+
+.o-layout--sidebar {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 64rem) {
+  .o-layout--sidebar {
+    grid-template-columns: 318px 1fr;
+    gap: 42px;
+  }
+}
+
+@media (min-width: 48rem) {
+  .o-layout--2col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.o-layout--3col {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+  .o-layout--3col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .o-layout--3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>Change Payment Date</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">Change Payment Date</h1>
+
+  <div class="c-alert c-alert--danger">
+    <strong>Note:</strong> Only one payment date change is allowed during the lifetime of your agreement.
+    Changing your payment date may incur additional interest.
+  </div>
+
+  <!-- Success message -->
+  <div th:if="${success}" class="c-alert c-alert--success" role="alert">
+    Your payment date has been changed successfully.
+  </div>
+
+  <!-- Error message -->
+  <div th:if="${error}" class="c-alert c-alert--danger" role="alert">
+    <span th:text="${error}">An error occurred.</span>
+  </div>
+
+  <!-- Already changed notice -->
+  <div th:if="${alreadyChanged}" class="c-alert c-alert--danger" role="alert">
+    You have already used your one-time payment date change for this agreement.
+  </div>
+
+  <form th:action="@{/finance/change-payment-date}" method="post" class="u-margin-bottom-normal"
+        th:if="${alreadyChanged == null or !alreadyChanged}">
+<input type="hidden" name="_csrf" th:value="${csrf}">
+
+    <input type="hidden" name="agreementId"
+           th:if="${agreements != null and !agreements.empty}"
+           th:value="${agreements[0].id}">
+
+    <div class="c-panel c-panel--header">
+      <div class="c-panel__inner">
+        <strong>Current payment date:</strong>
+        <span th:text="${currentPaymentDate} ?: '8th'">8th</span>
+      </div>
+    </div>
+
+    <div class="c-panel c-panel--content">
+      <div class="c-panel__inner">
+        <div class="c-form__field">
+          <label for="newPaymentDate" class="c-form__label">New payment date:</label>
+          <select name="newPaymentDate" id="newPaymentDate" class="c-select c-select--small" required>
+            <option th:each="d : ${#numbers.sequence(1, 28)}"
+                    th:value="${d}"
+                    th:text="${ordinal.dayWithSuffix(d)}"
+                    th:selected="${d == currentPaymentDay}">
+            </option>
+          </select>
+        </div>
+
+        <div class="c-form__field">
+          <label class="c-option">
+            <input type="checkbox" name="confirmChange" class="c-option__input" value="true" required>
+            <span class="c-option__label">I understand that changing my payment date may incur additional interest and I wish to proceed.</span>
+          </label>
+        </div>
+
+        <div class="u-button-group">
+          <a th:href="@{/my-account}" class="c-button c-button--cta c-button--secondary">Cancel</a>
+          <button type="submit" class="c-button c-button--cta">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Help section -->
+  <th:block th:replace="~{fragments/help-panel :: help-panel}" />
+
+</div>
+</body>
+</html>

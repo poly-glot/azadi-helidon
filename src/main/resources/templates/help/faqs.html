@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+  <title>FAQs</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h1 class="u-site-heading">FAQs</h1>
+
+  <!-- Dynamic FAQs from model -->
+  <th:block th:if="${faqs != null}">
+    <details th:each="faq, iter : ${faqs}"
+             class="c-accordion c-accordion--faq"
+             th:open="${iter.index == 0}">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label" th:text="${faq.question}">FAQ Question</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p th:text="${faq.answer}">FAQ answer content.</p>
+      </div>
+    </details>
+  </th:block>
+
+  <!-- Static fallback -->
+  <th:block th:if="${faqs == null}">
+
+    <details class="c-accordion c-accordion--faq" open>
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Something on my finance agreement doesn't look right. What should I do?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Get in touch with the dealership that arranged your finance. They have access to your
+          original paperwork and can liaise with us to correct any errors. In most cases, updates
+          are reflected on your account within five working days. If you'd rather speak to us
+          directly, our customer services team is happy to help on <strong>0345 786 4321</strong>.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">I have an issue with my vehicle. Who do I contact?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Your first point of contact should always be the supplying dealer, as they are
+          responsible for the condition of the vehicle at the point of sale. If you're unable
+          to reach a resolution, come back to us &mdash; under the Consumer Rights Act 2015 you
+          may have additional protections as the finance provider, and we'll work with you and
+          the dealer to find a fair outcome.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">How do I make a complaint about my agreement or the service I've received?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>We're sorry to hear something hasn't met your expectations. You can raise a complaint
+          by calling <strong>0345 786 4321</strong>, writing to us at
+          <strong>Azadi Financial Services, Imaginary Road, Birmingham B28 0HB</strong>, or
+          emailing the details to our customer services team. We aim to acknowledge every complaint
+          within two working days and to provide a full response within eight weeks. If you remain
+          dissatisfied, you have the right to refer the matter to the Financial Ombudsman Service.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Why is my outstanding balance higher than I expected?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Your balance is calculated daily and includes any interest that has accrued since your
+          last monthly payment. If a payment was missed, late, or only partially made, additional
+          interest will have been applied. For a full breakdown of charges and a current settlement
+          figure, visit the <a th:href="@{/finance/settlement-figure}">Settlement Figure</a> page
+          or contact us directly.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">How will my payments appear on my bank statement?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Monthly Direct Debit collections will show as <strong>AZADI FIN SVCS</strong> or
+          <strong>AFS</strong> on your statement. Card payments made through this portal will
+          appear as <strong>AZADI FINANCIAL</strong>. If you spot a transaction you don't recognise,
+          please contact us before raising a dispute with your bank so we can investigate promptly.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Can I change the date my monthly payment is collected?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Yes. You're entitled to one payment date change during the lifetime of your agreement.
+          You can do this online through the
+          <a th:href="@{/finance/change-payment-date}">Change Payment Date</a> page. Please be
+          aware that moving your collection date may result in a slightly longer interval between
+          payments, which can increase the total interest charged over the remaining term.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Why might changing my payment date cost me more?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Interest on your agreement accrues daily. When you move your payment date further into
+          the month &mdash; for example from the 1st to the 20th &mdash; there are additional days
+          between collections during which interest continues to build. The exact amount depends on
+          your outstanding balance and APR. You'll be asked to confirm you understand this before
+          the change is applied.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Can I settle my agreement early?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Absolutely. You can request a settlement figure at any time through the
+          <a th:href="@{/finance/settlement-figure}">Settlement Figure</a> page. The figure
+          includes a rebate of future interest charges as required by the Consumer Credit Act 1974.
+          Settlement figures are typically valid for 28 days. Once you've made your payment, we'll
+          confirm the agreement is closed within five working days.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">What happens if I miss a payment?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>If a payment is missed, we'll contact you to arrange collection as soon as possible.
+          A missed payment may result in additional interest and could affect your credit rating.
+          If you're experiencing financial difficulty, please reach out to our Collections team on
+          <strong> 0345 786 1234</strong> as early as you can &mdash; we have a range of support
+          options and would far rather work with you than let arrears build up.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">How do I update my personal details?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>You can update your address, phone number, email, and bank details directly through
+          this portal. Visit <a th:href="@{/my-contact-details}">My Contact Details</a> for
+          personal information or
+          <a th:href="@{/finance/update-bank-details}">Update Bank Details</a> to change your
+          Direct Debit account. Changes are applied to all your Azadi Financial Services accounts
+          and may take up to 24 hours to be fully reflected.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">I'm thinking of returning my vehicle under Voluntary Termination. How does that work?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Under the Consumer Credit Act 1974, you have the right to voluntarily terminate your
+          Hire Purchase or PCP agreement once you've repaid at least half of the total amount
+          payable. The vehicle must be returned in good condition, reflecting fair wear and tear
+          in line with BVRLA guidelines. To start the process, please contact our customer services
+          team who will explain your options and arrange collection of the vehicle.</p>
+      </div>
+    </details>
+
+    <details class="c-accordion c-accordion--faq">
+      <summary class="c-accordion__summary">
+        <span class="c-accordion__label">Where can I find my agreement number?</span>
+      </summary>
+      <div class="c-accordion__panel">
+        <p>Your agreement number appears on the original finance documentation you received from
+          the dealership, in the reference field of your Direct Debit mandate (visible through
+          your online banking), and in the welcome SMS we sent when your agreement began. If you
+          still can't locate it, call us on <strong>0345 786 4321</strong> and we'll look it up
+          using your personal details.</p>
+      </div>
+    </details>
+
+  </th:block>
+
+</div>
+</body>
+</html>

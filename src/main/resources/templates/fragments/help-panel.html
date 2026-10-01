@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<details th:fragment="help-panel" class="c-accordion c-accordion--section" open>
+  <summary class="c-accordion__summary">
+    <span class="c-accordion__label">Help</span>
+  </summary>
+  <div class="c-accordion__panel c-accordion__panel--shadow">
+    <div class="c-accordion__content">
+      <div>
+        Call Customer Services on:<br>
+        <strong class="u-text-2xl">0345 786 4321</strong>
+      </div>
+
+      <div class="u-margin-top">
+        Lines are open:<br>
+        <div class="c-table c-table--auto c-table--normal">
+          <div class="c-table__row">
+            <div class="c-table__column c-table__column--condense"><strong>Monday to Friday</strong></div>
+            <div class="c-table__column">8:30am - 6:00pm (excluding UK Bank Holidays)</div>
+          </div>
+          <div class="c-table__row">
+            <div class="c-table__column c-table__column--condense"><strong>Saturday</strong></div>
+            <div class="c-table__column">9:00am - 1:00pm</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="u-margin-top">
+        Calls will cost no more than a UK national rate call to 01 or 02 telephone numbers and will also count
+        towards inclusive UK call minutes provided in telephone and mobile phone contracts.
+      </p>
+
+      <p>
+        For customers who are hard of hearing or have speech difficulties, you can contact us using the Text
+        Relay (NGT) Service.
+      </p>
+    </div>
+  </div>
+</details>
+</body>
+</html>

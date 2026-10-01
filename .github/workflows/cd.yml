@@ -1,0 +1,215 @@
+name: CD
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '22'
+  GCP_REGION: ${{ vars.GCP_REGION || 'europe-west2' }}
+  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID || 'firebase-cloud-491613' }}
+  CLOUD_RUN_SERVICE: ${{ vars.CLOUD_RUN_SERVICE || 'azadi-helidon-api' }}
+  AR_REPO: ${{ vars.AR_REPO || 'firebase-cloud' }}
+  FIREBASE_SITE_ID: ${{ vars.FIREBASE_SITE_ID || 'azadi-helidon' }}
+
+jobs:
+  # ──────────────────────────────────────────────
+  # CI Gate -- run full CI first
+  # ──────────────────────────────────────────────
+  ci:
+    name: CI Gate
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  # ──────────────────────────────────────────────
+  # Build & push container image
+  # ──────────────────────────────────────────────
+  build-push-image:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    needs: ci
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Compute image tags
+        id: meta
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          IMAGE="${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.AR_REPO }}/azadi-helidon"
+          echo "image_tag=${IMAGE}:${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "image_latest=${IMAGE}:latest" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.image_tag }}
+            ${{ steps.meta.outputs.image_latest }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ──────────────────────────────────────────────
+  # Deploy to Staging
+  # ──────────────────────────────────────────────
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [ci, build-push-image]
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run (staging)
+        run: |
+          gcloud run deploy ${{ env.CLOUD_RUN_SERVICE }} \
+            --image ${{ needs.build-push-image.outputs.image_tag }} \
+            --region ${{ env.GCP_REGION }} \
+            --platform managed \
+            --tag staging \
+            --no-traffic \
+            --quiet
+
+      - name: Migrate database (seed job, idempotent)
+        run: |
+          gcloud run jobs update ${{ env.CLOUD_RUN_SERVICE }}-migrate \
+            --image ${{ needs.build-push-image.outputs.image_tag }} \
+            --region ${{ env.GCP_REGION }} \
+            --quiet
+          gcloud run jobs execute ${{ env.CLOUD_RUN_SERVICE }}-migrate --region ${{ env.GCP_REGION }} --wait --quiet
+
+      - name: Smoke test staging
+        run: |
+          STAGING_URL=$(gcloud run services describe ${{ env.CLOUD_RUN_SERVICE }} \
+            --region ${{ env.GCP_REGION }} \
+            --format='value(status.traffic.url)' | tr ';' '\n' | grep staging | head -1)
+          echo "Staging URL: $STAGING_URL"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${STAGING_URL}/actuator/health" || echo "000")
+          echo "Health check: HTTP $STATUS"
+          [ "$STATUS" -eq 200 ] || { echo "Staging health check FAILED"; exit 1; }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Hosting (preview)
+        run: |
+          firebase hosting:channel:deploy staging \
+            --project ${{ env.GCP_PROJECT_ID }} \
+            --only ${{ env.FIREBASE_SITE_ID }} \
+            --expires 7d
+
+  # ──────────────────────────────────────────────
+  # Deploy to Production
+  # ──────────────────────────────────────────────
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, build-push-image]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run (production)
+        run: |
+          gcloud run services update-traffic ${{ env.CLOUD_RUN_SERVICE }} \
+            --region ${{ env.GCP_REGION }} \
+            --to-latest \
+            --quiet
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Firebase (hosting + Datastore indexes)
+        run: |
+          firebase deploy --only hosting:${{ env.FIREBASE_SITE_ID }},firestore:indexes \
+            --project ${{ env.GCP_PROJECT_ID }}
+
+      - name: Create release tag
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          VERSION=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' pom.xml | head -1)
+          gh release create "v${VERSION}-${SHORT_SHA}" \
+            --title "v${VERSION}-${SHORT_SHA}" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ──────────────────────────────────────────────
+  # Post-deploy Smoke Test
+  # ──────────────────────────────────────────────
+  smoke-test:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    steps:
+      - name: Health check
+        run: |
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "https://azadi-helidon.web.app/actuator/health" || echo "000")
+          echo "API: HTTP $STATUS"
+          [ "$STATUS" -eq 200 ] || { echo "API smoke test FAILED"; exit 1; }
+
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "https://azadi-helidon.web.app/login" || echo "000")
+          echo "Hosting: HTTP $STATUS"
+          [ "$STATUS" -eq 200 ] || { echo "Hosting smoke test FAILED"; exit 1; }
+
+          echo "All smoke tests passed"

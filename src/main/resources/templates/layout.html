@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     
+      lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title layout:title-pattern="$CONTENT_TITLE - Azadi Financial Services">Azadi Financial Services</title>
+  <meta name="description" content="Azadi Financial Services customer portal">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="version" th:content="${appVersion}">
+
+  <link rel="icon" th:href="@{/assets/img/logo-azadi.svg}">
+  <link rel="apple-touch-icon" th:href="@{/assets/img/logo-azadi.svg}">
+  <meta name="apple-mobile-web-app-title" content="AZADI FINANCE">
+
+  <th:block layout:fragment="head-preload"></th:block>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" th:attr="nonce=${cspNonce}">
+
+  <!--/* Dev mode: Vite HMR client + source CSS/JS */-->
+  <th:block th:if="${viteDevUrl}">
+    <script type="module" th:src="${viteDevUrl + '/@vite/client'}" th:attr="nonce=${cspNonce}"></script>
+    <link rel="stylesheet" th:href="${viteDevUrl + '/css/main.css'}" th:attr="nonce=${cspNonce}">
+  </th:block>
+
+  <!--/* Prod mode: built, hashed assets */-->
+  <link th:if="${viteDevUrl == null}" rel="stylesheet" th:href="@{${viteAssets['css/main.css']}}" th:attr="nonce=${cspNonce}">
+</head>
+<body>
+  <!-- Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <!-- Toolbar (authenticated only) -->
+  <div th:if="${authenticated}" class="c-toolbar">
+    <div class="o-wrapper">
+      <p class="c-toolbar__greeting">
+        <strong>Hello</strong> <span th:text="${customerName}">John</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div th:if="${authenticated}" class="o-band o-band--md">
+    <div class="o-wrapper">
+      <div class="o-layout o-layout--medium o-layout--sidebar">
+        <!-- Desktop sidebar -->
+        <aside class="c-sidebar-nav">
+          <div th:replace="~{fragments/sidebar-nav :: sidebar-nav}"></div>
+        </aside>
+
+        <!-- Page content -->
+        <main>
+          <div layout:fragment="content">
+            <!-- Page-specific content goes here -->
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unauthenticated content (login page) -->
+  <div th:unless="${authenticated}">
+    <div layout:fragment="content-public">
+      <!-- Public page content goes here -->
+    </div>
+  </div>
+
+  <!-- Full-width content regardless of auth (legal pages) -->
+  <div layout:fragment="content-full">
+  </div>
+
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+  <!--/* Dev: JS from Vite with HMR. Prod: built hashed JS. */-->
+  <script th:if="${viteDevUrl}" type="module" th:src="${viteDevUrl + '/js/main.js'}" th:attr="nonce=${cspNonce}"></script>
+  <script th:if="${viteDevUrl == null}" type="module" th:src="@{${viteAssets['js/main.js']}}" th:attr="nonce=${cspNonce}"></script>
+</body>
+</html>

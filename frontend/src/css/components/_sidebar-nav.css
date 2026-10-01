@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Components: Sidebar Navigation
+   Desktop sidebar navigation using native details/summary.
+   ========================================================================== */
+
+.c-sidebar-nav {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .c-sidebar-nav {
+    display: block;
+  }
+}
+
+.c-nav-item {
+  margin-block-end: 0.9375rem;
+}
+
+/* Direct nav links (non-expandable items) */
+.c-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: 0 var(--spacing-medium);
+  min-height: 3.75rem;
+  text-decoration: none;
+  color: #000;
+  background-color: var(--color-white);
+  border: 1px solid #000;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  transition:
+    color 0.4s,
+    background-color 0.4s;
+}
+
+.c-nav-link:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.c-nav-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.c-nav-link--active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.c-nav-link--active:hover {
+  background-color: var(--color-gray-700);
+  color: var(--color-white);
+}
+
+.c-nav-link__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.c-nav-link--active .c-nav-link__icon {
+  opacity: 1;
+}
+
+.c-nav-link__label {
+  flex: 1;
+}
+
+.c-nav-link__arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* Expandable nav items using details/summary */
+.c-nav-details {
+  border: none;
+  margin: 0;
+  margin-block-end: 0.9375rem;
+  border-radius: 0;
+}
+
+.c-nav-details > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: 0 var(--spacing-medium);
+  min-height: 3.75rem;
+  text-decoration: none;
+  color: #000;
+  background-color: var(--color-white);
+  border: 1px solid #000;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+  transition:
+    color 0.4s,
+    background-color 0.4s;
+}
+
+.c-nav-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.c-nav-details > summary::marker {
+  content: '';
+}
+
+.c-nav-details > summary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.c-nav-details > summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* Indicator removed — reference has no visible expand icons */
+
+/* Sub-items */
+.c-nav-sub {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-nav-sub__link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: 0 var(--spacing-medium);
+  min-height: 3.75rem;
+  text-decoration: none;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-500);
+  border-block-start: none;
+  color: var(--color-gray-700);
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition:
+    color 0.4s,
+    background-color 0.4s;
+}
+
+.c-nav-sub__link:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.c-nav-sub__link--active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+.c-nav-sub__link--active:hover {
+  background-color: var(--color-gray-700);
+  color: var(--color-white);
+}

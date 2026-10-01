@@ -1,0 +1,177 @@
+[
+  {
+    "customer": {
+      "customerId": "CUST-001",
+      "fullName": "James Wilson",
+      "email": "james.wilson@email.com",
+      "dob": "1985-03-15",
+      "postcode": "SW1A 1AA",
+      "phone": "07700 900001",
+      "addressLine1": "10 Downing Street",
+      "addressLine2": null,
+      "city": "London"
+    },
+    "agreement": {
+      "agreementNumber": "AGR-100001",
+      "type": "PCP",
+      "balancePence": 6499960,
+      "apr": "10.0",
+      "originalTermMonths": 49,
+      "contractMileage": 40000,
+      "excessPricePerMilePence": 15,
+      "vehicleModel": "AZADI SUMMIT V8 TOURING",
+      "registration": "AB68 ABC",
+      "lastPaymentPence": 132652,
+      "nextPaymentPence": 132652,
+      "paymentsRemaining": 37
+    },
+    "bankDetails": {
+      "accountNumber": "12345678",
+      "sortCode": "20-30-40"
+    },
+    "documents": [
+      { "title": "Finance Agreement", "fileName": "finance-agreement.pdf" },
+      { "title": "Welcome Pack", "fileName": "welcome-pack.pdf" }
+    ]
+  },
+  {
+    "customer": {
+      "customerId": "CUST-002",
+      "fullName": "Sarah Thompson",
+      "email": "sarah.thompson@email.com",
+      "dob": "1990-07-22",
+      "postcode": "M1 1AE",
+      "phone": "07700 900002",
+      "addressLine1": "1 Piccadilly",
+      "addressLine2": "City Centre",
+      "city": "Manchester"
+    },
+    "agreement": {
+      "agreementNumber": "AGR-100002",
+      "type": "HP",
+      "balancePence": 1875000,
+      "apr": "8.5",
+      "originalTermMonths": 36,
+      "contractMileage": 30000,
+      "excessPricePerMilePence": 12,
+      "vehicleModel": "AZADI EXPLORER SPORT",
+      "registration": "CD19 XYZ",
+      "lastPaymentPence": 52083,
+      "nextPaymentPence": 52083,
+      "paymentsRemaining": 24
+    },
+    "bankDetails": {
+      "accountNumber": "87654321",
+      "sortCode": "10-20-30"
+    },
+    "documents": [
+      { "title": "Finance Agreement", "fileName": "finance-agreement.pdf" },
+      { "title": "Welcome Pack", "fileName": "welcome-pack.pdf" }
+    ]
+  },
+  {
+    "customer": {
+      "customerId": "CUST-003",
+      "fullName": "David Patel",
+      "email": "david.patel@email.com",
+      "dob": "1978-11-03",
+      "postcode": "B1 1BB",
+      "phone": "07700 900003",
+      "addressLine1": "1 Victoria Square",
+      "addressLine2": null,
+      "city": "Birmingham"
+    },
+    "agreement": {
+      "agreementNumber": "AGR-100003",
+      "type": "LEASE",
+      "balancePence": 2210000,
+      "apr": "6.9",
+      "originalTermMonths": 48,
+      "contractMileage": 35000,
+      "excessPricePerMilePence": 10,
+      "vehicleModel": "AZADI VANGUARD HSE",
+      "registration": "EF20 DEF",
+      "lastPaymentPence": 46042,
+      "nextPaymentPence": 46042,
+      "paymentsRemaining": 36
+    },
+    "bankDetails": {
+      "accountNumber": "11223344",
+      "sortCode": "40-50-60"
+    },
+    "documents": [
+      { "title": "Finance Agreement", "fileName": "finance-agreement.pdf" },
+      { "title": "Welcome Pack", "fileName": "welcome-pack.pdf" }
+    ]
+  },
+  {
+    "customer": {
+      "customerId": "CUST-004",
+      "fullName": "Emma Roberts",
+      "email": "emma.roberts@email.com",
+      "dob": "1992-01-28",
+      "postcode": "LS1 1BA",
+      "phone": "07700 900004",
+      "addressLine1": "1 City Square",
+      "addressLine2": null,
+      "city": "Leeds"
+    },
+    "agreement": {
+      "agreementNumber": "AGR-100004",
+      "type": "PCP",
+      "balancePence": 1420000,
+      "apr": "9.2",
+      "originalTermMonths": 42,
+      "contractMileage": 25000,
+      "excessPricePerMilePence": 14,
+      "vehicleModel": "AZADI PIONEER SE",
+      "registration": "GH21 GHI",
+      "lastPaymentPence": 33810,
+      "nextPaymentPence": 33810,
+      "paymentsRemaining": 30
+    },
+    "bankDetails": {
+      "accountNumber": "55667788",
+      "sortCode": "60-70-80"
+    },
+    "documents": [
+      { "title": "Finance Agreement", "fileName": "finance-agreement.pdf" },
+      { "title": "Welcome Pack", "fileName": "welcome-pack.pdf" }
+    ]
+  },
+  {
+    "customer": {
+      "customerId": "CUST-005",
+      "fullName": "Michael Chen",
+      "email": "michael.chen@email.com",
+      "dob": "1988-06-10",
+      "postcode": "EH1 1YZ",
+      "phone": "07700 900005",
+      "addressLine1": "1 Princes Street",
+      "addressLine2": null,
+      "city": "Edinburgh"
+    },
+    "agreement": {
+      "agreementNumber": "AGR-100005",
+      "type": "HP",
+      "balancePence": 1680000,
+      "apr": "7.5",
+      "originalTermMonths": 36,
+      "contractMileage": 20000,
+      "excessPricePerMilePence": 11,
+      "vehicleModel": "AZADI MERIDIAN R-DYNAMIC",
+      "registration": "IJ22 JKL",
+      "lastPaymentPence": 46667,
+      "nextPaymentPence": 46667,
+      "paymentsRemaining": 24
+    },
+    "bankDetails": {
+      "accountNumber": "99001122",
+      "sortCode": "80-90-00"
+    },
+    "documents": [
+      { "title": "Finance Agreement", "fileName": "finance-agreement.pdf" },
+      { "title": "Welcome Pack", "fileName": "welcome-pack.pdf" }
+    ]
+  }
+]

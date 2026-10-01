@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - ${HOME}/.npm:/home/vscode/.npm
+      - ${HOME}/.m2:/home/vscode/.m2
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    command: sleep infinity
+    user: vscode

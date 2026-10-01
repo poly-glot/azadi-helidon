@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Build-time and measurement entry points, not part of the served application -->
+    <Match>
+        <Or>
+            <Class name="guru.junaid.azadi.Ping"/>
+            <Class name="guru.junaid.azadi.seed.DataSeeder"/>
+            <Class name="guru.junaid.azadi.Train"/>
+        </Or>
+    </Match>
+
+    <!-- Constructor injection of collaborators: every object is built once in Main and never handed out afterwards -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+        <Method name="&lt;init&gt;"/>
+    </Match>
+
+    <!-- HTML email needs \n, not the platform line separator %n would give -->
+    <Match>
+        <Bug pattern="VA_FORMAT_STRING_USES_NEWLINE"/>
+        <Class name="guru.junaid.azadi.email.EmailTemplates"/>
+    </Match>
+
+    <!-- Thymeleaf reads ${param.x} through getParameterValues and treats a zero-length array as present and true -->
+    <Match>
+        <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS"/>
+        <Class name="guru.junaid.azadi.common.Views$Request"/>
+        <Method name="getParameterValues"/>
+    </Match>
+</FindBugsFilter>

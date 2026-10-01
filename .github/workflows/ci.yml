@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, master]
+  workflow_call:
+
+concurrency:
+  cancel-in-progress: true
+  group: ci-${{ github.ref }}
+
+env:
+  JAVA_VERSION: '21'
+  NODE_VERSION: '22'
+
+jobs:
+  # ──────────────────────────────────────────────
+  # Gates + tests, then HTTP/route checks against the emulator
+  # ──────────────────────────────────────────────
+  build-and-check:
+    name: Gates, Tests & Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          cache: 'maven'
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Quality gates, unit and integration tests
+        run: mvn -B verify
+
+      - name: Coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco
+          retention-days: 7
+
+      - name: Start Firestore emulator
+        run: |
+          docker run -d --name emulator -p 8081:8081 gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators \
+            gcloud emulators firestore start --host-port=0.0.0.0:8081 --database-mode=datastore-mode --project=demo-azadi
+          for i in $(seq 1 60); do curl -sf localhost:8081 >/dev/null && break; sleep 1; done
+
+      - name: Start fakes, seed, run app
+        run: |
+          mkdir -p target
+          node scripts/fakes.mjs > target/fakes.out 2>&1 &
+          ./scripts/seed.sh
+          set -a; . scripts/dev.env; set +a
+          java -cp "target/azadi-helidon-0.1.0-SNAPSHOT.jar:target/libs/*" guru.junaid.azadi.Main > target/run.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf localhost:8080/actuator/health >/dev/null && break; sleep 1; done
+
+      - name: HTTP checks
+        run: ./scripts/http-checks.sh
+
+      - name: Route checks
+        run: ./scripts/route-checks.sh
+
+      - name: App log on failure
+        if: failure()
+        run: cat target/run.log target/fakes.out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/azadi-helidon-*.jar
+          retention-days: 7
+
+  # ──────────────────────────────────────────────
+  # Container image (validate only)
+  # ──────────────────────────────────────────────
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (validate only)
+        uses: docker/build-push-action@v5
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          context: .
+          push: false
+          tags: azadi-helidon:ci
